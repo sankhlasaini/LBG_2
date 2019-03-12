@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Weather Forecaste</title>
+	<meta name="description" content="">
+
+	<!-- Mobile viewport optimized -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<!-- Bootstrap CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-glyphicons.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+
+	<!-- Custom CSS -->
+	<link href="css/custom.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- container main for data start -->
+	<div class="container-fluid" id="panel">
+		<!--Main Table Start -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div id="errorMsg"></div>
+				<div class="panel panel-default" id="mainData">
+					<h1 class="subhead" id="heading-text"> Weather Forecaste </h1>
+					<table class="table table-hover">
+						<!-- Table Body -->
+						<tbody id="tableData">
+							<!-- <tr>
+								<td colspan="5">
+									<div align="center" id="loading"><img src="images/loading.gif" alt=""></div>
+								</td>
+							</tr> -->
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Next Prev Button and Bottom info -->
+				<div id="bottomContent">
+					<div id="bottomInfo">
+						<!--  next & prev buttons -->
+						<button id="prev" class="btn btn-primary glyphicon glyphicon-chevron-left"></button>
+						<button id="next" class="btn btn-primary glyphicon glyphicon-chevron-right"></button>
+					</div>
+
+					<!-- Page Details -->
+					<div id="pageDetail"></div>
+				</div>
+			</div>
+		</div>
+		<!--Main Table Start -->
+	</div>
+	<!-- container main for data ends here -->
+
+	<!-- Scripts Start here -->
+
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	 crossorigin="anonymous"></script>
+	<!-- Bootstrap JS -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Custom JS -->
+	<script src="js/custom.js"></script>
+
+</body>
+
+</html>
