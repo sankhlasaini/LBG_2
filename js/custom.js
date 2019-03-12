@@ -28,8 +28,8 @@ $(function () {
 				+ '<br><span class="text-primary"><i class="fa fa-chevron-down"></i> ' + (allRecords[i].main.temp_min - 273.15).toFixed(1) + '&#8451;</span>'
 				+ '  <span class="text-danger"> <i class="fa fa-chevron-up"></i> ' + (allRecords[i].main.temp_max - 273.15).toFixed(1) + '&#8451;</span>'
 				+ '</td> <td>'
-				+ allRecords[i].weather[0].main + `<img src="http://openweathermap.org/img/w/${allRecords[i].weather[0].icon}.png" alt="forecast">`
-				+ `<br>${allRecords[i].wind.speed} m/s , Clouds ${allRecords[i].clouds.all}% , ${allRecords[i].main.pressure} hpa`
+				+ allRecords[i].weather[0].main + '<img src="http://openweathermap.org/img/w/' + allRecords[i].weather[0].icon + '.png" alt="forecast">'
+				+ '<br>' + allRecords[i].wind.speed + ' m/s , Clouds ' + allRecords[i].clouds.all + '% ,' + allRecords[i].main.pressure + ' hpa'
 				+ '</td></tr>'
 			);
 		};
@@ -55,17 +55,16 @@ $(function () {
 	getPosition();
 
 	function getPosition() {
-		console.log(localStorage.getItem('pos'));
-		if (localStorage.getItem('pos')) {
-			getWeatherByLatLng(JSON.parse(localStorage.getItem('pos')))
-		} else {
-			navigator.geolocation.getCurrentPosition((pos) => {
-				console.log(pos.coords);
-				const position = { lat: pos.coords.latitude, lng: pos.coords.longitude }
-				localStorage.setItem('pos', JSON.stringify(position));
-				getWeatherByLatLng(position);
-			});
-		}
+		window.navigator.geolocation.getCurrentPosition(function (pos) {
+			console.log(pos.coords);
+			const position = { lat: pos.coords.latitude, lng: pos.coords.longitude }
+			getWeatherByLatLng(position);
+		}, function (err) {
+			console.log(err);
+			const position = { lat: 12.838059099999999, lng: 77.6478817 };
+			$('#info-text').append(err.message, ' Showing Default Location');
+			getWeatherByLatLng(position);
+		});
 	}
 
 	function getWeatherByLatLng(pos) {
@@ -75,10 +74,10 @@ $(function () {
 			// headers: {
 			// 	'Access-Control-Allow-Origin': '*',
 			// },
-			url: `https://api.openweathermap.org/data/2.5/forecast?lat=${pos.lat}&lon=${pos.lng}&appid=f5f7c182f4a8850365de9575b191124b`,
+			url: 'https://api.openweathermap.org/data/2.5/forecast?lat=' + pos.lat + '&lon=' + pos.lng + '&appid=f5f7c182f4a8850365de9575b191124b',
 			// url: 'http://localhost:3000/weather',
-			success: (data) => {
-				$('#heading-text').append(`(${data.city.name} , ${data.city.country})`)
+			success: function (data) {
+				$('#heading-text').append(data.city.name + ', ' + data.city.country)
 				allRecords = data.list;
 				display10Record();
 			}
